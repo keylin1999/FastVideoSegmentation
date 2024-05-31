@@ -1,3 +1,5 @@
+# not exactly makefile, just a file to record the commands to run the experiments
+
 sh scripts/exps/one_patch_size.sh | tee scripts/output/one_patch_size/eval.txt
 sh scripts/exps/one_patch_cal_reduction | tee scripts/output/one_patch_size/reduction.txt
 
