@@ -1,0 +1,112 @@
+output/resnet18_d3/adaptive_50000/pseudo_192_8_128_0.9_0_0.95_0
+Precision: 0.8017
+Recall: 0.8949
+F1: 0.8457
+Accuracy: 0.9836
+Region similarity: 0.7327
+
+output/resnet18_d3/adaptive_50000/pseudo_192_8_128_0.9_1_0.95_0
+Precision: 0.8338
+Recall: 0.8929
+F1: 0.8624
+Accuracy: 0.9851
+Region similarity: 0.758
+
+output/resnet18_d3/adaptive_50000/pseudo_192_8_128_0.9_2_0.95_0
+Precision: 0.8566
+Recall: 0.892
+F1: 0.8739
+Accuracy: 0.9862
+Region similarity: 0.7761
+
+output/resnet18_d3/adaptive_50000/pseudo_192_8_128_0.9_3_0.95_0
+Precision: 0.8789
+Recall: 0.8917
+F1: 0.8853
+Accuracy: 0.9872
+Region similarity: 0.7942
+
+output/resnet18_d3/adaptive_50000/pseudo_192_8_128_0.9_4_0.95_0
+Precision: 0.8876
+Recall: 0.8909
+F1: 0.8892
+Accuracy: 0.9876
+Region similarity: 0.8006
+
+output/resnet18_d3/adaptive_50000/pseudo_192_8_128_0.9_5_0.95_0
+Precision: 0.8892
+Recall: 0.891
+F1: 0.8901
+Accuracy: 0.9877
+Region similarity: 0.802
+
+output/resnet18_d3/adaptive_50000/pseudo_192_8_128_0.9_6_0.95_0
+Precision: 0.8921
+Recall: 0.891
+F1: 0.8915
+Accuracy: 0.9878
+Region similarity: 0.8043
+
+output/resnet18_d3/adaptive_50000/pseudo_192_8_128_0.9_7_0.95_0
+Precision: 0.8928
+Recall: 0.891
+F1: 0.8919
+Accuracy: 0.9879
+Region similarity: 0.8049
+
+output/resnet18_d3/adaptive_50000/192_8_128_0.9_0_0.95_0
+Precision: 0.6445
+Recall: 0.8393
+F1: 0.7291
+Accuracy: 0.9711
+Region similarity: 0.5737
+
+output/resnet18_d3/adaptive_50000/192_8_128_0.9_1_0.95_0
+Precision: 0.7186
+Recall: 0.8379
+F1: 0.7737
+Accuracy: 0.9746
+Region similarity: 0.6309
+
+output/resnet18_d3/adaptive_50000/192_8_128_0.9_2_0.95_0
+Precision: 0.8349
+Recall: 0.8395
+F1: 0.8372
+Accuracy: 0.9804
+Region similarity: 0.72
+
+output/resnet18_d3/adaptive_50000/192_8_128_0.9_3_0.95_0
+Precision: 0.8417
+Recall: 0.839
+F1: 0.8404
+Accuracy: 0.9807
+Region similarity: 0.7247
+
+output/resnet18_d3/adaptive_50000/192_8_128_0.9_4_0.95_0
+Precision: 0.8412
+Recall: 0.8388
+F1: 0.84
+Accuracy: 0.9806
+Region similarity: 0.7241
+
+output/resnet18_d3/adaptive_50000/192_8_128_0.9_5_0.95_0
+Precision: 0.8425
+Recall: 0.8391
+F1: 0.8408
+Accuracy: 0.9807
+Region similarity: 0.7253
+
+output/resnet18_d3/adaptive_50000/192_8_128_0.9_6_0.95_0
+Precision: 0.8427
+Recall: 0.8388
+F1: 0.8408
+Accuracy: 0.9807
+Region similarity: 0.7253
+
+output/resnet18_d3/adaptive_50000/192_8_128_0.9_7_0.95_0
+Precision: 0.8428
+Recall: 0.839
+F1: 0.8409
+Accuracy: 0.9807
+Region similarity: 0.7255
+

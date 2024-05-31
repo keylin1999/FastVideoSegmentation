@@ -1,0 +1,42 @@
+output/resnet18_d3/tiled_single_50000/192_8_32_None_None_None
+Precision: 0.7547
+Recall: 0.8591
+F1: 0.8035
+Accuracy: 0.9777
+Region similarity: 0.6716
+
+output/resnet18_d3/tiled_single_50000/192_8_64_None_None_None
+Precision: 0.8075
+Recall: 0.8479
+F1: 0.8272
+Accuracy: 0.9796
+Region similarity: 0.7054
+
+output/resnet18_d3/tiled_single_50000/192_8_96_None_None_None
+Precision: 0.8239
+Recall: 0.8451
+F1: 0.8344
+Accuracy: 0.9802
+Region similarity: 0.7158
+
+output/resnet18_d3/tiled_single_50000/192_8_128_None_None_None
+Precision: 0.8326
+Recall: 0.8416
+F1: 0.8371
+Accuracy: 0.9804
+Region similarity: 0.7198
+
+output/resnet18_d3/tiled_single_50000/192_8_160_None_None_None
+Precision: 0.8333
+Recall: 0.841
+F1: 0.8371
+Accuracy: 0.9804
+Region similarity: 0.7199
+
+output/resnet18_d3/tiled_single_50000/192_8_192_None_None_None
+Precision: 0.8389
+Recall: 0.8412
+F1: 0.8401
+Accuracy: 0.9807
+Region similarity: 0.7243
+

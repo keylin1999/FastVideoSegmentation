@@ -1,0 +1,19 @@
+model: Resenet101Depth4
+
+exp_id: "resnet101_d4"
+batch_size: 8
+num_workers: 4
+
+lr: 0.00001
+steps: []
+gamma: 0.1
+weight_decay: 0.05
+
+iterations: 60000
+log_text_interval: 100
+log_image_interval: 1000
+save_checkpoint_interval:
+save_checkpoint_its: [40000, 50000, 60000]
+
+debug: false
+load_checkpoint:

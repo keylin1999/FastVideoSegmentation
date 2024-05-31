@@ -1,0 +1,96 @@
+------------- resnet18_d3 -------------
+Precision: 0.851
+Recall: 0.8365
+F1: 0.8437
+Accuracy: 0.9809
+Region similarity: 0.7296
+
+252
+------------- resnet18_d3_noBg -------------
+Precision: 0.7194
+Recall: 0.8182
+F1: 0.7656
+Accuracy: 0.9734
+Region similarity: 0.6202
+
+252
+------------- resnet18_d4 -------------
+Precision: 0.8313
+Recall: 0.8572
+F1: 0.8441
+Accuracy: 0.9814
+Region similarity: 0.7302
+
+252
+------------- resnet34_d3 -------------
+Precision: 0.8561
+Recall: 0.8419
+F1: 0.849
+Accuracy: 0.9816
+Region similarity: 0.7376
+
+252
+------------- resnet34_d3_noBg -------------
+Precision: 0.7832
+Recall: 0.8552
+F1: 0.8176
+Accuracy: 0.9789
+Region similarity: 0.6915
+
+252
+------------- resnet34_d4 -------------
+Precision: 0.8571
+Recall: 0.8444
+F1: 0.8507
+Accuracy: 0.9818
+Region similarity: 0.7402
+
+252
+------------- resnet50_d3 -------------
+Precision: 0.8351
+Recall: 0.8634
+F1: 0.849
+Accuracy: 0.982
+Region similarity: 0.7376
+
+252
+------------- resnet50_d3_noBg -------------
+Precision: 0.7642
+Recall: 0.8676
+F1: 0.8126
+Accuracy: 0.9787
+Region similarity: 0.6844
+
+252
+------------- resnet50_d4 -------------
+Precision: 0.8483
+Recall: 0.8546
+F1: 0.8515
+Accuracy: 0.9821
+Region similarity: 0.7413
+
+252
+------------- resnet101_d3 -------------
+Precision: 0.8346
+Recall: 0.8648
+F1: 0.8494
+Accuracy: 0.9821
+Region similarity: 0.7383
+
+252
+------------- resnet101_d3_noBg -------------
+Precision: 0.7875
+Recall: 0.8589
+F1: 0.8216
+Accuracy: 0.9793
+Region similarity: 0.6973
+
+252
+------------- resnet101_d4 -------------
+Precision: 0.8495
+Recall: 0.8477
+F1: 0.8486
+Accuracy: 0.9817
+Region similarity: 0.737
+
+252

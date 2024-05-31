@@ -1,0 +1,6 @@
+python cal_reduction.py --log_file tiled_single_50000/192_8_32_None_None_None
+python cal_reduction.py --log_file tiled_single_50000/192_8_64_None_None_None
+python cal_reduction.py --log_file tiled_single_50000/192_8_96_None_None_None
+python cal_reduction.py --log_file tiled_single_50000/192_8_128_None_None_None
+python cal_reduction.py --log_file tiled_single_50000/192_8_160_None_None_None
+python cal_reduction.py --log_file tiled_single_50000/192_8_192_None_None_None

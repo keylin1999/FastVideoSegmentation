@@ -1,0 +1,11 @@
+pre: 0.0437 post: 0.4123 reduction: 0.5440 percentage: 0.4560
+pre: 0.0697 post: 0.4502 reduction: 0.4801 percentage: 0.5199
+pre: 0.0942 post: 0.4673 reduction: 0.4385 percentage: 0.5615
+pre: 0.1149 post: 0.4732 reduction: 0.4119 percentage: 0.5881
+pre: 0.1406 post: 0.4781 reduction: 0.3813 percentage: 0.6187
+============================================================
+pre: 0.0594 post: 0.3875 reduction: 0.5531 percentage: 0.4469
+pre: 0.0816 post: 0.4188 reduction: 0.4997 percentage: 0.5003
+pre: 0.1057 post: 0.4275 reduction: 0.4668 percentage: 0.5332
+pre: 0.1185 post: 0.4329 reduction: 0.4486 percentage: 0.5514
+pre: 0.1406 post: 0.4363 reduction: 0.4230 percentage: 0.5770

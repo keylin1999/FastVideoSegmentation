@@ -1,0 +1,14 @@
+output/resnet18_d3/adaptive_50000/pseudo_192_8_128_0.9_0_0.0_67029
+Precision: 0.8912
+Recall: 0.8911
+F1: 0.8912
+Accuracy: 0.9878
+Region similarity: 0.8037
+
+output/resnet18_d3/adaptive_50000/pseudo_192_8_128_0.9_1000_0.0_67029
+Precision: 0.893
+Recall: 0.8912
+F1: 0.8921
+Accuracy: 0.9879
+Region similarity: 0.8052
+

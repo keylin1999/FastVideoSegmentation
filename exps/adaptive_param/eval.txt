@@ -1,0 +1,70 @@
+output/resnet18_d3/adaptive_single_50000/192_8_128_0.25_None_None
+Precision: 0.8501
+Recall: 0.8358
+F1: 0.8429
+Accuracy: 0.9809
+Region similarity: 0.7285
+
+output/resnet18_d3/adaptive_single_50000/192_8_128_0.5_None_None
+Precision: 0.8501
+Recall: 0.8358
+F1: 0.8429
+Accuracy: 0.9809
+Region similarity: 0.7285
+
+output/resnet18_d3/adaptive_single_50000/192_8_128_0.75_None_None
+Precision: 0.8477
+Recall: 0.8371
+F1: 0.8424
+Accuracy: 0.9808
+Region similarity: 0.7277
+
+output/resnet18_d3/adaptive_single_50000/192_8_128_0.9_None_None
+Precision: 0.8417
+Recall: 0.8384
+F1: 0.84
+Accuracy: 0.9806
+Region similarity: 0.7242
+
+output/resnet18_d3/adaptive_single_50000/192_8_128_0.95_None_None
+Precision: 0.8407
+Recall: 0.8381
+F1: 0.8394
+Accuracy: 0.9806
+Region similarity: 0.7233
+
+output/resnet18_d3/adaptive_single_50000/192_8_192_0.25_None_None
+Precision: 0.8501
+Recall: 0.8358
+F1: 0.8429
+Accuracy: 0.9809
+Region similarity: 0.7285
+
+output/resnet18_d3/adaptive_single_50000/192_8_192_0.5_None_None
+Precision: 0.8501
+Recall: 0.8358
+F1: 0.8429
+Accuracy: 0.9809
+Region similarity: 0.7285
+
+output/resnet18_d3/adaptive_single_50000/192_8_192_0.75_None_None
+Precision: 0.8488
+Recall: 0.8367
+F1: 0.8427
+Accuracy: 0.9809
+Region similarity: 0.7281
+
+output/resnet18_d3/adaptive_single_50000/192_8_192_0.9_None_None
+Precision: 0.8459
+Recall: 0.8372
+F1: 0.8415
+Accuracy: 0.9808
+Region similarity: 0.7264
+
+output/resnet18_d3/adaptive_single_50000/192_8_192_0.95_None_None
+Precision: 0.8455
+Recall: 0.8372
+F1: 0.8413
+Accuracy: 0.9807
+Region similarity: 0.7261
+

@@ -1,0 +1,10 @@
+# torch and torchvision doesn't have to be this version
+torch==1.9.0
+torchvision==0.10.0
+tensorboard==2.14.0
+tensorboard-data-server==0.7.2
+Pillow==9.5.0
+numpy==1.24.4
+opencv-python==4.8.1.78
+PyYAML==6.0.1
+thop==0.1.1.post2209072238

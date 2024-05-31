@@ -1,0 +1,7 @@
+python cal_reduction.py --log_file one_patch_single_50000/128_8_128_None_None_None
+python cal_reduction.py --log_file one_patch_single_50000/160_8_128_None_None_None
+python cal_reduction.py --log_file one_patch_single_50000/192_8_128_None_None_None
+python cal_reduction.py --log_file one_patch_single_50000/256_8_128_None_None_None
+python cal_reduction.py --log_file one_patch_single_50000/320_8_128_None_None_None
+python cal_reduction.py --log_file one_patch_single_50000/384_8_128_None_None_None
+python cal_reduction.py --log_file one_patch_single_50000/448_8_128_None_None_None

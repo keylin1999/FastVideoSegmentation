@@ -1,0 +1,26 @@
+pre: 0.0195 post: 0.3532 reduction: 0.6272 percentage: 0.3728
+pre: 0.0273 post: 0.3852 reduction: 0.5875 percentage: 0.4125
+pre: 0.0349 post: 0.4011 reduction: 0.5640 percentage: 0.4360
+pre: 0.0419 post: 0.4139 reduction: 0.5442 percentage: 0.4558
+pre: 0.0501 post: 0.4302 reduction: 0.5196 percentage: 0.4804
+pre: 0.0577 post: 0.4453 reduction: 0.4969 percentage: 0.5031
+pre: 0.0648 post: 0.4491 reduction: 0.4861 percentage: 0.5139
+pre: 0.0719 post: 0.4561 reduction: 0.4720 percentage: 0.5280
+===============================================================
+pre: 0.0204 post: 0.3566 reduction: 0.6229 percentage: 0.3771
+pre: 0.0293 post: 0.3891 reduction: 0.5816 percentage: 0.4184
+pre: 0.0383 post: 0.4076 reduction: 0.5541 percentage: 0.4459
+pre: 0.0462 post: 0.4248 reduction: 0.5291 percentage: 0.4709
+pre: 0.0545 post: 0.4337 reduction: 0.5118 percentage: 0.4882
+pre: 0.0655 post: 0.4505 reduction: 0.4840 percentage: 0.5160
+pre: 0.0731 post: 0.4544 reduction: 0.4726 percentage: 0.5274
+pre: 0.0804 post: 0.4604 reduction: 0.4592 percentage: 0.5408
+===============================================================
+pre: 0.0227 post: 0.3644 reduction: 0.6129 percentage: 0.3871
+pre: 0.0344 post: 0.3977 reduction: 0.5679 percentage: 0.4321
+pre: 0.0463 post: 0.4225 reduction: 0.5312 percentage: 0.4688
+pre: 0.0594 post: 0.4440 reduction: 0.4966 percentage: 0.5034
+pre: 0.0709 post: 0.4563 reduction: 0.4728 percentage: 0.5272
+pre: 0.0811 post: 0.4607 reduction: 0.4582 percentage: 0.5418
+pre: 0.0906 post: 0.4667 reduction: 0.4427 percentage: 0.5573
+pre: 0.0964 post: 0.4681 reduction: 0.4354 percentage: 0.5646
