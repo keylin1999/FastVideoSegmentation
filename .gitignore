@@ -1,3 +1,4 @@
 output/
 **/__pycache__/
 temp.ipynb
+.DS_Store
