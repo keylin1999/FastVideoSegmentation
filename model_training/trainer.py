@@ -1,4 +1,5 @@
 from model_training.network import str2Model
+import torch.nn.functional as F
 from model_training.loss import LossComputer
 from model_training.logger import TensorboardLogger, Integrator
 import random
@@ -48,7 +49,9 @@ class Trainer:
         image = image.cuda()
         target = target.cuda()
         out = {}
-        pred_gt, pred_logit = self.model(image)
+        # pred_gt, pred_logit = self.model(image)
+        pred_logit = self.model(image)
+        pred_gt = F.softmax(pred_logit, 1)
 
         out[f'mask'] = pred_gt
         out[f'logit'] = pred_logit

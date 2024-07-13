@@ -1,6 +1,10 @@
 import torch.nn as nn
 import torch.nn.functional as F
 from torchvision.models import resnet18, resnet34, resnet50, resnet101, resnet152
+from model_training.unets import AttU_Net, U_Net
+from model_training.unetpp import NestedUNet
+from model_training.test import VitSeg
+
 from typing import Optional, List
 import torch
 
@@ -224,7 +228,24 @@ class Resenet152Depth1(Resnet152):
     def __init__(self, depth=1) -> None:
         super().__init__(depth=depth)
 
+import segmentation_models_pytorch as smp
+
 def str2Model(string):
+    if string == "UNetPPRes101":
+        return lambda: smp.UnetPlusPlus(encoder_name='resnet101', encoder_weights='imagenet', classes=2)
+
+    if string == "PSPRes101":
+        return lambda: smp.PSPNet(encoder_name='resnet101', encoder_weights='imagenet', classes=2)
+
+    if string == "UNetPP":
+        return NestedUNet
+    if string == "UNet":
+        return U_Net
+    if string == "TransUnet":
+        return VitSeg
+    if string == "AttnUnet":
+        return AttU_Net
+
     if string == "Resenet18Depth4":
         return Resenet18Depth4
     if string == "Resenet18Depth3":

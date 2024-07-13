@@ -1,0 +1,7 @@
+Precision: 0.8049
+Recall: 0.8718
+F1: 0.837
+Accuracy: 0.9811
+Region similarity: 0.7197
+
+252

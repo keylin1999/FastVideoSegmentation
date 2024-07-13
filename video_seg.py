@@ -255,6 +255,7 @@ def get_label(label_path, index):
     label = get_files(label_path)
     label = sort_file(label)
     img = Image.open(os.path.join(label_path, label[index])).convert('L')
+    img = img.resize((512, 512), Image.NEAREST)
     img = np.array(img)
     return img
 
@@ -263,10 +264,14 @@ def box_post_process(margin, img_size):
         ratio = 512 / img_size
         left, right, top, bottom = box
         left, top, right, bottom = left * ratio, top * ratio, right * ratio, bottom * ratio
-        top = math.floor(top / 16) * 16
-        left = math.floor(left / 16) * 16
-        bottom = math.ceil(bottom / 16) * 16
-        right = math.ceil(right / 16) * 16
+        # top = math.floor(top / 16) * 16
+        # left = math.floor(left / 16) * 16
+        # bottom = math.ceil(bottom / 16) * 16
+        # right = math.ceil(right / 16) * 16
+        top = math.floor(top / 32) * 32
+        left = math.floor(left / 32) * 32
+        bottom = math.ceil(bottom / 32) * 32
+        right = math.ceil(right / 32) * 32
         if left > margin and right < 512 - margin:
             left -= margin
             right += margin
@@ -296,6 +301,7 @@ def segment_boxes(img, boxes, model):
         left, right, top, bottom = box
         img2 = img[:, top:bottom, left:right].unsqueeze(0)
         dic = model(img2)
+        dic = (None, dic)
         ops_temp, _ = profile(model, inputs=(img2.cuda(), ), verbose=False)
         ops += ops_temp
         prob = softmax(dic[1])[0][1]
@@ -334,7 +340,7 @@ def load_img(transform, image_path, first_img_path):
     img = transform(img)
     fimg = Image.open(first_img_path).convert('RGB')
     fimg = transform(fimg)
-    img[0] = fimg[0]
+    # img[0] = fimg[0]
     img.unsqueeze_(0)
 
     return img
@@ -399,7 +405,8 @@ def video_runner(args, model, IMG_SIZE, MARGIN, patch_splitting):
                 img = load_img(load_transform, image_path, first_img_path)
                 img = img.cuda()
 
-                _, x = model(img)
+                # _, x = model(img)
+                x = model(img)
                 x = torch.argmax(x, dim=1)[0]
                 x = x.cpu().detach().numpy()
                 x = x.astype('uint8')
@@ -521,7 +528,7 @@ def single_runner(args, model, IMG_SIZE, MARGIN, patch_splitting):
         gt[video] = []
         video_boxes[video] = []
         for index, image in enumerate(images):
-            if video[:4] != 'CVAI' and index == last_file[video] - 10 + 1:
+            if video[:4] != 'CVAI' and video in last_file and index == last_file[video] - 10 + 1:
                 break
 
             image_path = os.path.join(video_dir, image)
@@ -532,12 +539,14 @@ def single_runner(args, model, IMG_SIZE, MARGIN, patch_splitting):
             boxes = []
 
             img = img.cuda()
-            _, x = model(img)
+            x = model(img)
+            # _, x = model(img)
             x = torch.argmax(x, dim=1)[0]
             x = x.cpu().detach().numpy()
             x = x.astype('uint8')
             ops, _ = profile(model, inputs=(img, ), verbose=False)
             total_ops[0] += ops
+            print(ops, IMG_SIZE, total_ops[0])
             
             if x.sum() > 850 * ((IMG_SIZE / 512) ** 2):
                 boxes = patch_splitting(x)
@@ -644,13 +653,13 @@ def run():
     args.add_argument('-me', '--method', type=str, required=True)
     args.add_argument('-pa', '--path', type=str, required=True)
     args.add_argument('-com', '--comment', type=str, default='')
-    args.add_argument('-e', '--epoch', type=int, default=60000)
+    args.add_argument('-e', '--epoch', type=int, default=50000)
     args.add_argument('-s', '--size', type=int, default=512)
     args.add_argument('-ma', '--margin', type=int, default=None)
     args.add_argument('-lt', '--label_thresh', type=int, default=None)
     args.add_argument('-at', '--area_thresh', type=float, default=None)
     args.add_argument('-c', '--cont', type=int, default=None)
-    args.add_argument('-pi', '--pixel_thresh', type=int, default=None)
+    args.add_argument('-pi', '--pixel_thresh', type=int, default=0)
     args.add_argument('-vt', '--video_thresh', type=float, default=None)
     args.add_argument('--output', type=str, default=None)
     args = args.parse_args()
@@ -746,6 +755,10 @@ def run():
     with open(os.path.join(output_path, 'evaluation.txt'), 'w') as f:
         f.write(str(metric))
         f.write(f'\nTotal ops: {ops}')
+        t_ops = profile(model, inputs=(torch.randn(1, 3, 512, 512).cuda(), ), verbose=False)[0] * 362
+        a = ops[0] / t_ops
+        b = ops[1] / t_ops
+        f.write(f"\npre: {a:.4f} post: {b:.4f} reduction: {1 - (a + b):.4f} percentage: {(a + b):.4f}")
     metric.print()
 
 if __name__ == '__main__':

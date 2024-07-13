@@ -1,4 +1,3 @@
-# import datasets class
 from torch.utils.data.dataset import Dataset
 from torchvision.transforms import transforms
 from PIL import Image
@@ -6,19 +5,7 @@ import torch
 import numpy as np
 import os
 import cv2 as cv
-
-last_file = {
-    'CAU7': 38,
-    'CRA17': 61,
-    'CRA27': 38,
-    'CAU31': 49,
-    'CRA31': 53,
-    'CRA34': 50,
-    'CAU26': 43,
-    'CRA0': 52,
-    'CRA9': 55,
-    'CRA23': 56
-}
+import random
 
 def sort_file(files):
     temp = list(map(lambda x: [len(x), x], files))
@@ -31,49 +18,24 @@ def get_files(file_dir):
         files.remove('.DS_Store')
     return files
 
-class CAGDataset(Dataset):
-    def __init__(
-        self,
-        train=True,
-        background_img=True,
-        noAug=False,
-        file_dir="/home/charlieyao/XMem_total/training_dataset/static_type0_first_blank_copy"
-    ):
-        self.download = False
-        self.background_img = background_img
-        self.train = train
-        self.seed = 0
-        image_dir = os.path.join(file_dir, "JPEGImages")
-        target_dir = os.path.join(file_dir, "Annotations")
 
-        self.images = []
-        self.targets = []
-        self.image_info = []
+class DCA1(Dataset):
+    def __init__(self, train=True, noAug=False, file_dir='/home/charlieyao/XMem_total/training_dataset/Database_134_Angiograms/'):
+        random.seed(0)
+        arange = list(range(1, 135))
+        random.shuffle(arange)
+        train_files = arange[:100]
+        test_files = arange[100:]
+
+        files = train_files if train else test_files
+        files.sort()
+
+        self.images = [f"{file_dir}{file}.pgm" for file in files]
+        self.targets = [f"{file_dir}{file}_gt.pgm" for file in files]
+        self.image_info = [["DCA1", f"{file}.pgm"] for file in files]
         self.noAug = noAug
+        self.train = train
 
-        # get list of images and targets
-        videos = get_files(image_dir)
-        for video in videos:
-            video_dir = os.path.join(image_dir, video)
-            video_targets = os.path.join(target_dir, video)
-            images = get_files(video_dir)
-            images = sort_file(images)
-            if video in last_file:
-                images = images[:last_file[video] - 10 + 1]
-            first_img = images[0]
-            for image in images[1:]:
-                image_path = os.path.join(video_dir, image)
-                target_path = None
-                if os.path.exists(os.path.join(video_targets, image)):
-                    target_path = os.path.join(video_targets, image)
-                elif os.path.exists(os.path.join(video_targets, image.replace(".jpg", ".png"))):
-                    target_path = os.path.join(video_targets, image.replace(".jpg", ".png"))
-                else:
-                    raise Exception("Target file does not exist")
-                self.images.append([image_path, os.path.join(video_dir, first_img)])
-                self.targets.append(target_path)
-                self.image_info.append([video, image])
-    
     def _image_transform(self, image):
         img = Image.open(image).convert('RGB')
         img = np.array(img)
@@ -143,18 +105,14 @@ class CAGDataset(Dataset):
 
 
     def __getitem__(self, index):
-        img, first_img = self.images[index]
+        img = self.images[index]
         target = self.targets[index]
         self.set_seed()
 
         if self.train:
             img = self._image_transform_aug(img)
-            first_img = self._image_transform_aug(first_img)
         else:
             img = self._image_transform(img)
-            first_img = self._image_transform(first_img)
-        if self.background_img:
-            img[0, :, :] = first_img[0, :, :]
         if self.train:
             target = self._target_transform_aug(target)
         else:
@@ -164,20 +122,14 @@ class CAGDataset(Dataset):
     
     def __len__(self):
         return len(self.images)
-
-class CAGTestDataset(CAGDataset):
-    def __init__(
-        self,
-        train=False,
-        background_img=True
-    ) -> None:
-        
-        self.file_dir = "/home/charlieyao/XMem_total/eval_dataset/bounding_box"
-        self.download = False
-
-        super().__init__(train, file_dir=self.file_dir, background_img=background_img)
     
+class DCA1Test(DCA1):
+    def __init__(self, noAug=False, file_dir='/home/charlieyao/XMem_total/training_dataset/Database_134_Angiograms/'):
+        super().__init__(False, noAug, file_dir)
+
+
 if __name__ == '__main__':
-    dataset = CAGDataset()
+    dataset = DCA1()
     print(len(dataset))
-    dataset[0]
+    print(dataset[0])
+    

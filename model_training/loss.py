@@ -5,8 +5,12 @@ import torch.nn.functional as F
 from collections import defaultdict
     
 class CrossEntropyDiceLoss(nn.CrossEntropyLoss):
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+    def __init__(self, config):
+        super().__init__()
+        self.config = config
+        self.thresh = 150*464/8
+        if 'dataset' in self.config and self.config['dataset'] == 'DCA1':
+            self.thresh = 101*20 / 8
         self.counter = 0 
     def forward(self, input, target):
         """Return cross-entropy loss and add auxiliary loss if possible."""
@@ -17,7 +21,7 @@ class CrossEntropyDiceLoss(nn.CrossEntropyLoss):
         prob2 = F.softmax(input, dim=1)
 
         # compute dice loss
-        if self.counter > 150*464/8: # 150 epoch
+        if self.counter > self.thresh: # 150 epoch
             mask = prob2[:, 1].flatten(start_dim=1)
             gt = (target==1).float().flatten(start_dim=1)
             numerator = 2 * (mask * gt).sum(-1) # -1 means last axis
@@ -37,6 +41,6 @@ class CrossEntropyDiceLoss(nn.CrossEntropyLoss):
 class LossComputer:
     def __init__(self, config) -> None:
         self.config = config
-        self.loss = CrossEntropyDiceLoss()
+        self.loss = CrossEntropyDiceLoss(config=config)
     def compute(self, data, it):
         return self.loss(data['logit'], data['target'])

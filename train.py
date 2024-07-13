@@ -1,5 +1,6 @@
 from model_training.trainer import Trainer
 from model_training.dataset import CAGDataset
+from model_training.dca import DCA1
 from torch.utils.data import DataLoader
 import math
 import yaml
@@ -20,7 +21,14 @@ background_img = True
 if 'background_img' in config and config['background_img'] == False:
     background_img = False
 
-dataset = CAGDataset(background_img=background_img)
+noAug = False
+if config["model"] == "TransUnet":
+    noAug = True
+
+if 'dataset' in config and config['dataset'] == 'DCA1':
+    dataset = DCA1(noAug=noAug)
+else:
+    dataset = CAGDataset(background_img=background_img, noAug=noAug)
 # shuffle make big difference
 train_loader = DataLoader(dataset, config['batch_size'], num_workers=config['num_workers'], shuffle=True)
 model = Trainer(config=config)
