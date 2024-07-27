@@ -14,17 +14,18 @@
                 "CUDA_VISIBLE_DEVICES": "1"
             },
             "args": [
-                "-mo", "resnet18_d3",
+                "-mop", "/home/charlieyao/XMem_total/torchprune/data/results/cagdataset/Resenet18Depth3/2024_01_30_10_14_31_328586/retrained_networks/Resenet18Depth3_CAGDataset_e250_PCANet_0_p53_rep0_re50_i4",
+                "-mn", "tttt",
                 "-s", "192",
                 "-ma", "8",
                 "-lt", "128",
                 "-at", "0.9",
                 "-me", "adaptive",
-                "-pa", "bounding_merged",
+                "-pa", "bounding_box",
                 "-e", "50000",
-                "-c", "0",
-                "-pi", "39139",
-                "-vt", "0.00001"
+                "-c", "7",
+                "-pi", "0",
+                "-vt", "0.90"
             ]
         },
         {

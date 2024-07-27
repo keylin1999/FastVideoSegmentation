@@ -1,4 +1,4 @@
-from model_training.network import str2Model
+from model_training.network import str2Model, Resenet18Depth3
 import argparse
 import torch
 import math
@@ -301,7 +301,7 @@ def segment_boxes(img, boxes, model):
         left, right, top, bottom = box
         img2 = img[:, top:bottom, left:right].unsqueeze(0)
         dic = model(img2)
-        dic = (None, dic)
+        # dic = (None, dic)
         ops_temp, _ = profile(model, inputs=(img2.cuda(), ), verbose=False)
         ops += ops_temp
         prob = softmax(dic[1])[0][1]
@@ -340,7 +340,7 @@ def load_img(transform, image_path, first_img_path):
     img = transform(img)
     fimg = Image.open(first_img_path).convert('RGB')
     fimg = transform(fimg)
-    # img[0] = fimg[0]
+    img[0] = fimg[0]
     img.unsqueeze_(0)
 
     return img
@@ -405,8 +405,8 @@ def video_runner(args, model, IMG_SIZE, MARGIN, patch_splitting):
                 img = load_img(load_transform, image_path, first_img_path)
                 img = img.cuda()
 
-                # _, x = model(img)
-                x = model(img)
+                _, x = model(img)
+                # x = model(img)
                 x = torch.argmax(x, dim=1)[0]
                 x = x.cpu().detach().numpy()
                 x = x.astype('uint8')
@@ -539,8 +539,8 @@ def single_runner(args, model, IMG_SIZE, MARGIN, patch_splitting):
             boxes = []
 
             img = img.cuda()
-            x = model(img)
-            # _, x = model(img)
+            # x = model(img)
+            _, x = model(img)
             x = torch.argmax(x, dim=1)[0]
             x = x.cpu().detach().numpy()
             x = x.astype('uint8')
@@ -647,11 +647,49 @@ def get_runner(method):
     }
     return runners[method]
 
+from torchprune.util.net import NetHandle
+from torchprune.method.alds import ALDSNet
+from torchprune.method.pca import PCANet
+from torchprune.method.pfp import PFPNet
+from torchprune.method.sipp import SiPPNet
+from torchprune.method.thres_filter import FilterThresNet
+
+def method2net(method):
+    if method == 'alds':
+        return ALDSNet
+    elif method == 'pca':
+        return PCANet
+    elif method == 'pfp':
+        return PFPNet
+    elif method == 'sipp':
+        return SiPPNet
+    elif method == 'thres':
+        return FilterThresNet
+    else:
+        raise ValueError('Unknown method')
+    
+def filename2method(file_name):
+    fa = file_name[32]
+    fb = file_name[33]
+    if fa == 'A':
+        return 'alds'
+    elif fa == 'P':
+        if fb == 'C':
+            return 'pca'
+        elif fb == 'F':
+            return 'pfp'
+    elif fa == 'S':
+        return 'sipp'
+    elif fa == 'F':
+        return 'thres'
+    
+work_dir = '/home/charlieyao/XMem_total/torchprune/data/results/cagdataset/Resenet18Depth3/2024_01_30_10_14_31_328586/retrained_networks/'
+
 def run():
     args = argparse.ArgumentParser()
     args.add_argument('-mop', '--model_path', type=str, default=None)
     args.add_argument('-mn', '--model_name', type=str, default=None)
-    args.add_argument('-mo', '--model', type=str, required=True)
+    args.add_argument('-mo', '--model', type=str, required=False)
     args.add_argument('-me', '--method', type=str, required=True)
     args.add_argument('-pa', '--path', type=str, required=True)
     args.add_argument('-com', '--comment', type=str, default='')
@@ -682,19 +720,24 @@ def run():
     model = None
     if args.model_path is not None:
         pass
-        # find the model and load it
-    else:
-        model = torch.load('output/' + args.model + f'/checkpoint_{args.epoch}.pth')
-        model2 = str2Model(model['model_type'])()
-        model = model['network']
-        model2.load_state_dict(model)
+        model = torch.load(args.model_path)
+        model2 = NetHandle(Resenet18Depth3())
+        model2 = method2net(filename2method(args.model_path[125:]))(model2, [], lambda x, y: x)
+
+        model = model['net']
+        model2.load_state_dict(model, strict=False)
+        model2 = model2.compressed_net.torchnet
         model = model2.cuda().eval()
+        model = model.cuda()
+    else:
+        raise ValueError('Model path must be provided')
     
     # generate output_path name
     output_path = ''
     if args.model_path is not None:
         if args.model_name is None:
             raise ValueError('Model name must be provided')
+        comment = args.comment + '_' if args.comment else ''
         output_path = f'output/{args.model_name}/{args.method}/{comment}{args.size}_{args.margin}_{args.label_thresh}_{args.area_thresh}_{args.cont}_{args.video_thresh}_{args.pixel_thresh*3}'
     else:
         output_path = args.output
